@@ -15,7 +15,6 @@ const Cards = () => {
     offset: ["start end", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.7]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.95]);
 
@@ -72,7 +71,7 @@ const Cards = () => {
       data-scroll 
       data-scroll-section 
       data-scroll-speed="-.1" 
-      className="min-h-screen w-full flex flex-col md:flex-row gap-5 items-center px-[3.922vw] py-20 relative overflow-hidden bg-zinc-900"
+      className="min-h-screen w-full flex flex-col md:flex-row gap-4 sm:gap-5 items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 relative overflow-hidden bg-zinc-900"
       style={{ opacity, scale }}
     >
       {/* Animated background elements */}
@@ -96,7 +95,7 @@ const Cards = () => {
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-[#cdea68] rounded-full opacity-20"
+          className="absolute w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#cdea68] rounded-full opacity-20"
           style={{
             left: `${20 + i * 15}%`,
             top: `${30 + i * 10}%`,
@@ -119,18 +118,18 @@ const Cards = () => {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="w-full flex flex-col md:flex-row gap-5 relative z-10"
+        className="w-full flex flex-col md:flex-row gap-4 sm:gap-5 relative z-10"
       >
         {/* First Large Card */}
         <motion.div 
           ref={firstCardRef}
           variants={cardVariants}
-          className="cardcontainer w-full md:w-1/2 h-[55vh]"
+          className="cardcontainer w-full md:w-1/2 h-[45vh] sm:h-[50vh] md:h-[55vh]"
           style={{ y: card1Y }}
         >
           <motion.div 
             className="card group relative h-full w-full bg-gradient-to-br from-[#004d43] to-[#003832] rounded-xl flex items-center justify-center overflow-hidden"
-            whileHover={{ scale: 1.02, rotateY: 5 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Animated gradient overlay */}
@@ -164,7 +163,7 @@ const Cards = () => {
               style={{
                 backgroundImage: `linear-gradient(rgba(205, 234, 104, 0.5) 1px, transparent 1px),
                                  linear-gradient(90deg, rgba(205, 234, 104, 0.5) 1px, transparent 1px)`,
-                backgroundSize: '50px 50px'
+                backgroundSize: '30px 30px'
               }}
             />
 
@@ -172,7 +171,7 @@ const Cards = () => {
               variants={iconVariants}
               src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               alt="Heritage Icon"
-              className="w-36 relative z-10 drop-shadow-2xl"
+              className="w-24 sm:w-28 md:w-32 lg:w-36 relative z-10 drop-shadow-2xl"
               whileHover={{ 
                 scale: 1.1,
                 rotate: [0, -5, 5, -5, 0],
@@ -183,20 +182,20 @@ const Cards = () => {
 
             {/* Decorative corner elements */}
             <motion.div
-              className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-[#cdea68] opacity-50"
+              className="absolute top-3 sm:top-4 left-3 sm:left-4 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border-t-2 border-l-2 border-[#cdea68] opacity-50"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.5 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             />
             <motion.div
-              className="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-[#cdea68] opacity-50"
+              className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border-b-2 border-r-2 border-[#cdea68] opacity-50"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.5 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             />
 
             <motion.button 
-              className="absolute left-8 bottom-6 border-2 border-[#cdea68] px-4 py-2 rounded-full text-xs text-[#cdea68] font-medium backdrop-blur-sm bg-black/20 overflow-hidden group/btn"
+              className="absolute left-4 sm:left-6 md:left-8 bottom-4 sm:bottom-5 md:bottom-6 border-2 border-[#cdea68] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs text-[#cdea68] font-medium backdrop-blur-sm bg-black/20 overflow-hidden group/btn"
               whileHover={{ scale: 1.05, borderColor: "#ffffff" }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
@@ -240,7 +239,7 @@ const Cards = () => {
 
         {/* Right Side Cards Container */}
         <motion.div 
-          className="cardcontainer w-full md:w-1/2 h-[55vh] flex gap-5"
+          className="cardcontainer w-full md:w-1/2 h-[45vh] sm:h-[50vh] md:h-[55vh] flex flex-row md:flex-row gap-4 sm:gap-5"
           variants={containerVariants}
         >
           {/* Second Card */}
@@ -252,7 +251,7 @@ const Cards = () => {
           >
             <motion.div 
               className="card group relative w-full h-full bg-gradient-to-br from-[#212121] to-[#161616] rounded-xl flex items-center justify-center overflow-hidden"
-              whileHover={{ scale: 1.03, rotateY: -5 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Animated mesh gradient */}
@@ -283,7 +282,7 @@ const Cards = () => {
                 variants={iconVariants}
                 src="https://cdn-icons-png.flaticon.com/512/2991/2991108.png"
                 alt="Stories Icon"
-                className="w-36 relative z-10 drop-shadow-2xl"
+                className="w-24 sm:w-28 md:w-32 lg:w-36 relative z-10 drop-shadow-2xl"
                 whileHover={{ 
                   scale: 1.15,
                   rotate: 360,
@@ -294,14 +293,14 @@ const Cards = () => {
 
               {/* Corner accent */}
               <motion.div
-                className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/30"
+                className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 border-t-2 border-r-2 border-white/30"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 0.3 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
               />
 
               <motion.button 
-                className="absolute left-8 bottom-6 border-2 border-white/50 px-4 py-2 rounded-full text-xs backdrop-blur-sm bg-white/10 overflow-hidden group/btn"
+                className="absolute left-3 sm:left-4 md:left-6 lg:left-8 bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6 border-2 border-white/50 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[9px] sm:text-[10px] md:text-xs backdrop-blur-sm bg-white/10 overflow-hidden group/btn"
                 whileHover={{ scale: 1.05, borderColor: "#cdea68", color: "#cdea68" }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -315,13 +314,13 @@ const Cards = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <span className="relative z-10 font-medium">
-                  1000+ STORIES ARCHIVED
+                  1000+ STORIES
                 </span>
               </motion.button>
 
               {/* Glowing orb */}
               <motion.div
-                className="absolute w-32 h-32 bg-white/5 rounded-full blur-3xl"
+                className="absolute w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 bg-white/5 rounded-full blur-3xl"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.3, 0.5, 0.3]
@@ -344,7 +343,7 @@ const Cards = () => {
           >
             <motion.div 
               className="card group relative w-full h-full bg-gradient-to-br from-[#212121] to-[#0a0a0a] rounded-xl flex items-center justify-center overflow-hidden"
-              whileHover={{ scale: 1.03, rotateY: 5 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Radial gradient overlay */}
@@ -368,7 +367,7 @@ const Cards = () => {
                 variants={iconVariants}
                 src="https://cdn-icons-png.flaticon.com/512/854/854878.png"
                 alt="Community Icon"
-                className="w-36 relative z-10 drop-shadow-2xl"
+                className="w-24 sm:w-28 md:w-32 lg:w-36 relative z-10 drop-shadow-2xl"
                 whileHover={{ 
                   scale: 1.15,
                   y: -10,
@@ -383,7 +382,7 @@ const Cards = () => {
 
               {/* Animated rings */}
               <motion.div
-                className="absolute w-40 h-40 border border-white/10 rounded-full"
+                className="absolute w-32 sm:w-36 md:w-40 h-32 sm:h-36 md:h-40 border border-white/10 rounded-full"
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.3, 0, 0.3]
@@ -395,7 +394,7 @@ const Cards = () => {
                 }}
               />
               <motion.div
-                className="absolute w-40 h-40 border border-white/10 rounded-full"
+                className="absolute w-32 sm:w-36 md:w-40 h-32 sm:h-36 md:h-40 border border-white/10 rounded-full"
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.3, 0, 0.3]
@@ -410,14 +409,14 @@ const Cards = () => {
 
               {/* Corner accent */}
               <motion.div
-                className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/30"
+                className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 border-b-2 border-l-2 border-white/30"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 0.3 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
               />
 
               <motion.button 
-                className="absolute left-8 bottom-6 border-2 border-white/50 px-4 py-2 rounded-full text-xs backdrop-blur-sm bg-white/10 overflow-hidden group/btn"
+                className="absolute left-3 sm:left-4 md:left-6 lg:left-8 bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6 border-2 border-white/50 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[9px] sm:text-[10px] md:text-xs backdrop-blur-sm bg-white/10 overflow-hidden group/btn"
                 whileHover={{ scale: 1.05, borderColor: "#cdea68", color: "#cdea68" }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -431,7 +430,7 @@ const Cards = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <span className="relative z-10 font-medium">
-                  GLOBAL CONTRIBUTORS
+                  GLOBAL
                 </span>
               </motion.button>
             </motion.div>

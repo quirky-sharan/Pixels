@@ -129,21 +129,21 @@ const Eyes = () => {
         className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ff9933,transparent_60%)] opacity-30"
       />
 
-      {/* ASHOKA CHAKRA */}
+      {/* ASHOKA CHAKRA - RESPONSIVE */}
       <img
         ref={chakraRef}
         src="https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg"
-        className="absolute top-1/2 left-1/2 w-[38vw] opacity-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute top-1/2 left-1/2 w-[60vw] sm:w-[50vw] md:w-[45vw] lg:w-[38vw] opacity-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         alt=""
       />
 
-      {/* EYES */}
-      <div className="absolute flex gap-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      {/* EYES - RESPONSIVE */}
+      <div className="absolute flex gap-4 sm:gap-6 md:gap-8 lg:gap-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 
         {[leftEye, rightEye].map((eye, i) => (
           <div
             key={i}
-            className="group relative w-[14vw] h-[14vw] bg-zinc-100 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_0_60px_rgba(255,153,51,0.6)]"
+            className="group relative w-[30vw] h-[30vw] sm:w-[22vw] sm:h-[22vw] md:w-[18vw] md:h-[18vw] lg:w-[14vw] lg:h-[14vw] max-w-[200px] max-h-[200px] bg-zinc-100 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-[0_0_40px_rgba(255,153,51,0.4)] sm:hover:shadow-[0_0_60px_rgba(255,153,51,0.6)]"
           >
             <div
               ref={i === 0 ? leftLid : rightLid}
@@ -152,10 +152,10 @@ const Eyes = () => {
 
             <div
               ref={eye}
-              className="relative w-[9vw] h-[9vw] rounded-full bg-zinc-900"
+              className="relative w-[20vw] h-[20vw] sm:w-[14vw] sm:h-[14vw] md:w-[11vw] md:h-[11vw] lg:w-[9vw] lg:h-[9vw] max-w-[130px] max-h-[130px] rounded-full bg-zinc-900"
             >
               <div className="absolute top-1/2 left-1/2 w-full px-[2px]">
-                <div className="w-[1.7vw] h-[1.7vw] rounded-full bg-zinc-100" />
+                <div className="w-[4vw] h-[4vw] sm:w-[3vw] sm:h-[3vw] md:w-[2.2vw] md:h-[2.2vw] lg:w-[1.7vw] lg:h-[1.7vw] max-w-[25px] max-h-[25px] rounded-full bg-zinc-100" />
               </div>
             </div>
           </div>

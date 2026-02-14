@@ -88,7 +88,7 @@ const Featured = () => {
   };
 
   return (
-    <div ref={sectionRef} className="relative z-10 bg-zinc-900 w-full py-20 overflow-hidden">
+    <div ref={sectionRef} className="relative z-10 bg-zinc-900 w-full py-12 sm:py-16 md:py-20 overflow-hidden">
       {/* Subtle animated background texture */}
       <motion.div
         className="absolute inset-0 opacity-[0.02]"
@@ -105,22 +105,22 @@ const Featured = () => {
         }}
       />
 
-      {/* Header Section */}
+      {/* Header Section - RESPONSIVE */}
       <motion.div 
-        className="w-full px-[3.922vw] pb-10 border-b border-zinc-700/50 relative"
+        className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-6 sm:pb-8 md:pb-10 border-b border-zinc-700/50 relative"
         style={{ y: headerY, opacity: headerOpacity }}
       >
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={titleVariants}
-          className="flex items-end justify-between"
+          className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4"
         >
-          <h1 className="text-[4vw] font-['FoundersGrotesk'] tracking-tight font-normal">
+          <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] lg:text-[4vw] font-['FoundersGrotesk'] tracking-tight font-normal">
             Featured Collections
           </h1>
           <motion.p 
-            className="text-zinc-400 text-sm max-w-md pb-1"
+            className="text-zinc-400 text-xs sm:text-sm max-w-md pb-0 sm:pb-1"
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -130,9 +130,9 @@ const Featured = () => {
         </motion.div>
       </motion.div>
 
-      {/* Cards Grid */}
-      <div ref={cardsRef} className="w-full px-[3.922vw] py-[2.922vw]">
-        <div className="w-full relative flex flex-wrap -mx-2">
+      {/* Cards Grid - RESPONSIVE */}
+      <div ref={cardsRef} className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 md:py-10 lg:py-12">
+        <div className="w-full relative flex flex-wrap -mx-1 sm:-mx-2">
           
           {cardData.map((card, index) => (
             <motion.div
@@ -143,13 +143,11 @@ const Featured = () => {
               variants={cardVariants}
               onHoverStart={() => handleHovering(index)}
               onHoverEnd={() => handleHoverEnd(index)}
-              className={`cardcontainer group relative p-2 mb-10 h-[50vh] md:h-[75vh] ${
-                index < 2 ? 'w-full md:w-1/2' : 'w-full md:w-1/2'
-              }`}
+              className={`cardcontainer group relative p-1 sm:p-2 mb-4 sm:mb-6 md:mb-8 lg:mb-10 h-[40vh] sm:h-[45vh] md:h-[60vh] lg:h-[75vh] w-full md:w-1/2`}
             >
-              {/* Animated Title - Clean and minimal */}
+              {/* Animated Title - RESPONSIVE - Hidden on mobile for space */}
               <h1 
-                className={`flex overflow-hidden text-[8vw] absolute z-[999] top-1/2 -translate-y-1/2 font-['FoundersGrotesk'] font-normal pointer-events-none ${
+                className={`hidden md:flex overflow-hidden text-[12vw] md:text-[10vw] lg:text-[8vw] absolute z-[999] top-1/2 -translate-y-1/2 font-['FoundersGrotesk'] font-normal pointer-events-none ${
                   index % 2 === 0 
                     ? 'left-full -translate-x-1/2' 
                     : 'right-full translate-x-1/2'
@@ -221,22 +219,34 @@ const Featured = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </motion.div>
 
-                  {/* Description tag - more subtle */}
+                  {/* Title badge on mobile */}
                   <motion.div
-                    className="absolute bottom-6 left-6 px-4 py-2 bg-zinc-900/70 backdrop-blur-sm rounded-full border border-zinc-700/50"
+                    className="absolute top-4 left-4 md:hidden px-3 py-1.5 bg-zinc-900/70 backdrop-blur-sm rounded-full border border-zinc-700/50"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <span className="text-xs text-[#cdea68] tracking-wider uppercase font-medium">
+                      {card.title}
+                    </span>
+                  </motion.div>
+
+                  {/* Description tag - more subtle - RESPONSIVE */}
+                  <motion.div
+                    className="absolute bottom-4 sm:bottom-5 md:bottom-6 left-4 sm:left-5 md:left-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/70 backdrop-blur-sm rounded-full border border-zinc-700/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileHover={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="text-xs text-zinc-300 tracking-wider uppercase font-light">
+                    <span className="text-[10px] sm:text-xs text-zinc-300 tracking-wider uppercase font-light">
                       {card.description}
                     </span>
                   </motion.div>
                 </div>
 
-                {/* Minimal corner accent lines */}
+                {/* Minimal corner accent lines - Hidden on small mobile */}
                 <motion.div
-                  className="absolute top-4 left-4 w-6 h-6 border-t border-l opacity-0 pointer-events-none z-[2]"
+                  className="hidden sm:block absolute top-3 sm:top-4 left-3 sm:left-4 w-5 sm:w-6 h-5 sm:h-6 border-t border-l opacity-0 pointer-events-none z-[2]"
                   style={{ borderColor: card.color }}
                   animate={{
                     opacity: hoveredCard === index ? 0.3 : 0
@@ -244,7 +254,7 @@ const Featured = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <motion.div
-                  className="absolute bottom-4 right-4 w-6 h-6 border-b border-r opacity-0 pointer-events-none z-[2]"
+                  className="hidden sm:block absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-5 sm:w-6 h-5 sm:h-6 border-b border-r opacity-0 pointer-events-none z-[2]"
                   style={{ borderColor: card.color }}
                   animate={{
                     opacity: hoveredCard === index ? 0.3 : 0
@@ -258,14 +268,14 @@ const Featured = () => {
         </div>
       </div>
 
-      {/* Bottom decorative element */}
+      {/* Bottom decorative element - RESPONSIVE */}
       <motion.div
-        className="w-full px-[3.922vw] pt-10 border-t border-zinc-800/50"
+        className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-8 md:pt-10 border-t border-zinc-800/50"
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <div className="flex items-center justify-between text-sm text-zinc-500">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 text-xs sm:text-sm text-zinc-500">
           <motion.span
             whileHover={{ color: '#cdea68', x: 3 }}
             transition={{ duration: 0.3 }}
@@ -273,7 +283,7 @@ const Featured = () => {
           >
             View All Collections →
           </motion.span>
-          <span className="font-light">Preserving cultural heritage through immersive storytelling</span>
+          <span className="font-light text-[11px] sm:text-sm">Preserving cultural heritage through immersive storytelling</span>
         </div>
       </motion.div>
     </div>

@@ -52,58 +52,62 @@ const About = () => {
       ref={container}
       data-scroll
       data-scroll-speed="-.2"
-      className="w-full py-24 bg-[#cdea68] rounded-t-3xl text-zinc-900 overflow-hidden"
+      className="w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-[#cdea68] rounded-t-3xl text-zinc-900 overflow-hidden"
     >
-      {/* TOP TEXT */}
+      {/* TOP TEXT - RESPONSIVE */}
       <motion.div
         style={{ y: textY, opacity: textOpacity }}
-        className="px-[5.922vw]"
+        className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
       >
-        <p className="text-[3.65vw] leading-none w-[90%]">
-          Our platform is a living digital archive for the world’s folk stories,
+        <p className="text-[5vw] sm:text-[4.5vw] md:text-[4vw] lg:text-[3.65vw] leading-tight sm:leading-snug w-full sm:w-[95%] md:w-[90%] font-light">
+          Our platform is a living digital archive for the world's folk stories,
           oral traditions, and timeless songs — built to preserve cultural
           heritage, celebrate diversity, and connect generations through stories.
         </p>
       </motion.div>
 
-      {/* STRIP */}
+      {/* STRIP - RESPONSIVE */}
       <motion.div
         variants={stagger}
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true }}
-        className="w-full border-y border-zinc-500/60 mt-16 px-[5.922vw]"
+        className="w-full border-y border-zinc-500/60 mt-8 sm:mt-10 md:mt-12 lg:mt-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
       >
-        <div className="flex flex-col md:flex-row gap-10 pt-6 pb-32">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 pt-4 sm:pt-5 md:pt-6 pb-16 sm:pb-20 md:pb-24 lg:pb-32">
+          
+          {/* First Column */}
           <motion.div
             variants={fadeUp}
-            className="md:basis-[25vw] lg:basis-[50vw]"
+            className="lg:basis-[50vw] text-sm sm:text-base"
           >
             What you can experience:
           </motion.div>
 
+          {/* Second Column */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-col basis-[25vw] w-[50vw] gap-7"
+            className="flex flex-col w-full lg:w-[50vw] gap-4 sm:gap-5 md:gap-6 lg:gap-7 text-sm sm:text-base"
           >
-            <span>
+            <span className="font-light">
               Explore authentic folk tales, regional legends, and traditional
               songs from every corner of the globe — shared by communities,
               storytellers, and cultural enthusiasts.
             </span>
 
-            <span>
+            <span className="font-light">
               Discover stories in their original voice, language, and emotion.
               We blend technology with tradition to make cultural heritage
               accessible, immersive, and everlasting.
             </span>
           </motion.div>
 
+          {/* Third Column */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-col basis-[25vw] justify-end md:pl-24"
+            className="flex flex-col lg:justify-end lg:pl-12 xl:pl-24 text-sm sm:text-base"
           >
-            <span className="mb-3">Connect:</span>
+            <span className="mb-2 sm:mb-3">Connect:</span>
 
             {[
               "Submit Your Story",
@@ -113,9 +117,9 @@ const About = () => {
             ].map((item, i) => (
               <motion.span
                 key={i}
-                whileHover={{ x: 14 }}
+                whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                className="cursor-pointer"
+                className="cursor-pointer font-light"
               >
                 {item}
               </motion.span>
@@ -124,19 +128,23 @@ const About = () => {
         </div>
       </motion.div>
 
-      {/* BOTTOM */}
-      <div className="flex flex-col lg:flex-row gap-14 px-[3.922vw] mt-6 justify-between items-center">
+      {/* BOTTOM - RESPONSIVE */}
+      <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-4 sm:mt-5 md:mt-6 justify-between items-start lg:items-center">
+        
+        {/* Left Side - Button */}
         <motion.div
           {...fadeUp}
-          className="flex flex-col gap-5 items-start"
+          className="flex flex-col gap-4 sm:gap-5 items-start"
         >
-          <h3 className="text-[4vw]">Our approach:</h3>
+          <h3 className="text-[6vw] sm:text-[5vw] md:text-[4.5vw] lg:text-[4vw] font-normal">
+            Our approach:
+          </h3>
 
           <motion.button
             whileHover="hover"
             initial="rest"
             animate="rest"
-            className="relative text-white px-7 py-4 bg-zinc-900 rounded-full text-[1.184vw] overflow-hidden"
+            className="relative text-white px-5 sm:px-6 md:px-7 py-3 sm:py-3.5 md:py-4 bg-zinc-900 rounded-full text-xs sm:text-sm md:text-base lg:text-[1.184vw] overflow-hidden"
           >
             <motion.span
               variants={{
@@ -162,16 +170,17 @@ const About = () => {
           </motion.button>
         </motion.div>
 
+        {/* Right Side - Image */}
         <motion.div
           style={{ scale: imgScale, rotate: imgRotate }}
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease }}
-          className="rounded-2xl overflow-hidden flex items-center justify-center w-[400px] md:w-[640px] shadow-[0_25px_70px_rgba(0,0,0,0.18)]"
+          className="rounded-2xl overflow-hidden flex items-center justify-center w-full sm:w-[90%] md:w-[500px] lg:w-[580px] xl:w-[640px] shadow-[0_15px_50px_rgba(0,0,0,0.15)] sm:shadow-[0_20px_60px_rgba(0,0,0,0.18)] lg:shadow-[0_25px_70px_rgba(0,0,0,0.18)]"
         >
           <img
             src="https://ochi.design/wp-content/uploads/2022/05/Homepage-Photo-663x469.jpg"
             className="object-cover w-full h-full"
-            alt=""
+            alt="About"
           />
         </motion.div>
       </div>

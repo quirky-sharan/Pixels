@@ -32,7 +32,6 @@ export default function LandingPage() {
   const [index, setIndex] = useState(0);
 
   /* ---------------- Scroll ---------------- */
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -42,7 +41,6 @@ export default function LandingPage() {
   const opacityShift = useTransform(scrollYProgress, [0, 0.6], [1, 0.7]);
 
   /* ---------------- Mouse Depth ---------------- */
-
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -58,7 +56,6 @@ export default function LandingPage() {
   };
 
   /* ---------------- Auto Slide ---------------- */
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % regions.length);
@@ -67,7 +64,6 @@ export default function LandingPage() {
   }, []);
 
   /* ---------------- Smooth Wave ---------------- */
-
   const waveCursor = useMotionValue(0.5);
   const smoothWave = useSpring(waveCursor, {
     stiffness: 60,
@@ -82,8 +78,6 @@ export default function LandingPage() {
   const waveHeights = Array.from({ length: WAVE_COUNT }).map((_, i) =>
     useTransform(smoothWave, (v) => {
       const position = i / WAVE_COUNT;
-
-      // Gaussian curve for smooth wave
       const sigma = 0.08;
       const amplitude = 60;
       const gaussian =
@@ -93,8 +87,6 @@ export default function LandingPage() {
       return 20 + gaussian;
     })
   );
-
-  /* ---------------- Render ---------------- */
 
   return (
     <div
@@ -121,8 +113,8 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90" />
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 pt-36 px-[6vw]">
+      {/* Content - RESPONSIVE */}
+      <div className="relative z-10 pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {headlines.map((text, i) => (
           <motion.h1
             key={i}
@@ -133,8 +125,8 @@ export default function LandingPage() {
               duration: 1.4,
               ease: [0.22, 1, 0.36, 1],
             }}
-            whileHover={{ letterSpacing: "6px" }}
-            className="font-['FoundersGrotesk'] text-[9vw] leading-[7vw] uppercase"
+            whileHover={{ letterSpacing: "0.1em" }}
+            className="font-['FoundersGrotesk'] text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] leading-[0.85] uppercase font-normal"
           >
             {text}
           </motion.h1>
@@ -144,7 +136,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 1.2 }}
-          className="mt-10 text-zinc-300 max-w-2xl text-[1.3vw]"
+          className="mt-6 sm:mt-8 md:mt-10 text-zinc-300 max-w-xl lg:max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl font-light"
         >
           A living digital archive where stories transcend borders.
         </motion.p>
@@ -153,12 +145,12 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2, duration: 1 }}
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-10 flex items-center gap-3 px-6 py-3 border border-[#cdea68] text-[#cdea68] uppercase text-sm rounded-full tracking-wider"
+          className="mt-6 sm:mt-8 md:mt-10 flex items-center gap-2 sm:gap-3 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 border border-[#cdea68] text-[#cdea68] uppercase text-xs sm:text-sm rounded-full tracking-wider"
         >
           Explore Archive
-          <BsArrowUpRight />
+          <BsArrowUpRight className="text-xs sm:text-sm" />
         </motion.button>
 
         <motion.div
@@ -166,38 +158,38 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="absolute bottom-32 right-[6vw] text-right"
+          className="absolute bottom-20 sm:bottom-24 md:bottom-28 lg:bottom-32 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 text-right"
         >
-          <p className="text-sm text-zinc-400 uppercase tracking-widest">
+          <p className="text-xs sm:text-sm text-zinc-400 uppercase tracking-widest">
             Now Featuring
           </p>
-          <h2 className="text-3xl font-light uppercase">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-light uppercase mt-1">
             {regions[index].name}
           </h2>
         </motion.div>
       </div>
 
-      {/* Smooth Gaussian Wave */}
+      {/* Smooth Gaussian Wave - RESPONSIVE */}
       <div
         onMouseMove={handleWaveMove}
         onTouchMove={handleWaveMove}
-        className="absolute bottom-0 w-full flex justify-center gap-[2px] pb-8 z-10"
+        className="absolute bottom-0 w-full flex justify-center gap-[1px] sm:gap-[1.5px] md:gap-[2px] pb-6 sm:pb-7 md:pb-8 z-10"
       >
         {waveHeights.map((height, i) => (
           <motion.div
             key={i}
             style={{ height }}
-            className="w-[3px] bg-[#cdea68] opacity-70 rounded-full"
+            className="w-[2px] sm:w-[2.5px] md:w-[3px] bg-[#cdea68] opacity-70 rounded-full"
           />
         ))}
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - RESPONSIVE */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
         transition={{ delay: 3 }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 text-zinc-500 text-xs tracking-widest"
+        className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 text-zinc-500 text-[10px] sm:text-xs tracking-widest"
       >
         SCROLL TO DISCOVER
       </motion.div>

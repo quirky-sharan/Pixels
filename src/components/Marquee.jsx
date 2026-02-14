@@ -19,7 +19,7 @@ const Marquee = () => {
       ref={marqueeRef}
       data-scroll 
       data-scroll-speed='.1' 
-      className="w-full py-[5.922vw] rounded-t-3xl bg-gradient-to-br from-[#004D43] via-[#005d4f] to-[#004D43] relative overflow-hidden"
+      className="w-full py-[8vw] sm:py-[7vw] md:py-[6vw] lg:py-[5.922vw] rounded-t-3xl bg-gradient-to-br from-[#004D43] via-[#005d4f] to-[#004D43] relative overflow-hidden"
       style={{ opacity, scale, y }}
     >
       {/* Subtle background elements */}
@@ -42,7 +42,7 @@ const Marquee = () => {
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-48 h-48 rounded-full blur-3xl opacity-30"
+          className="absolute w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 rounded-full blur-3xl opacity-30"
           style={{
             background: i % 2 === 0 
               ? 'radial-gradient(circle, rgba(205, 234, 104, 0.1) 0%, transparent 70%)'
@@ -63,20 +63,20 @@ const Marquee = () => {
         />
       ))}
 
-      {/* Top fade overlay */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#004D43] via-[#004D43]/60 to-transparent z-10 pointer-events-none" />
+      {/* Top fade overlay - RESPONSIVE */}
+      <div className="absolute top-0 left-0 right-0 h-16 sm:h-20 md:h-24 bg-gradient-to-b from-[#004D43] via-[#004D43]/60 to-transparent z-10 pointer-events-none" />
       
-      {/* Bottom fade overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#004D43] via-[#004D43]/60 to-transparent z-10 pointer-events-none" />
+      {/* Bottom fade overlay - RESPONSIVE */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 md:h-24 bg-gradient-to-t from-[#004D43] via-[#004D43]/60 to-transparent z-10 pointer-events-none" />
 
-      {/* Left fade overlay */}
-      <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#004D43] via-[#004D43]/70 to-transparent z-10 pointer-events-none" />
+      {/* Left fade overlay - RESPONSIVE */}
+      <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-[#004D43] via-[#004D43]/70 to-transparent z-10 pointer-events-none" />
       
-      {/* Right fade overlay */}
-      <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#004D43] via-[#004D43]/70 to-transparent z-10 pointer-events-none" />
+      {/* Right fade overlay - RESPONSIVE */}
+      <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-20 md:w-24 bg-gradient-to-l from-[#004D43] via-[#004D43]/70 to-transparent z-10 pointer-events-none" />
 
       <motion.div 
-        className="text border-t text-[30vw] border-b border-zinc-300/20 flex items-center gap-[3vw] whitespace-nowrap font-['FoundersGrotesk'] uppercase overflow-hidden relative"
+        className="text border-t border-b border-zinc-300/20 flex items-center gap-[3vw] whitespace-nowrap font-['FoundersGrotesk'] uppercase overflow-hidden relative"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -106,15 +106,17 @@ const Marquee = () => {
           }}
         />
 
-        {/* First marquee text */}
+        {/* First marquee text - RESPONSIVE */}
         <motion.h1
           initial={{ x: '0%' }}
           animate={{ x: "-100%" }}
           transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-          className="leading-none -mt-[5.8vw] -mb-[2.665vw] font-normal tracking-tight relative"
+          className="leading-none text-[35vw] sm:text-[32vw] md:text-[30vw] font-normal tracking-tight relative"
           style={{
             textShadow: '0 2px 20px rgba(0, 0, 0, 0.3)',
             fontWeight: 400,
+            marginTop: '-0.19em',
+            marginBottom: '-0.09em',
           }}
         >
           <motion.span
@@ -128,15 +130,17 @@ const Marquee = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Second marquee text */}
+        {/* Second marquee text - RESPONSIVE */}
         <motion.h1
           initial={{ x: '0%' }}
           animate={{ x: "-100%" }}
           transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-          className="leading-none -mt-[5.8vw] -mb-[2.665vw] font-normal tracking-tight relative"
+          className="leading-none text-[35vw] sm:text-[32vw] md:text-[30vw] font-normal tracking-tight relative"
           style={{
             textShadow: '0 2px 20px rgba(0, 0, 0, 0.3)',
             fontWeight: 400,
+            marginTop: '-0.19em',
+            marginBottom: '-0.09em',
           }}
         >
           <motion.span
@@ -150,15 +154,17 @@ const Marquee = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Third marquee text (for seamless loop) */}
+        {/* Third marquee text (for seamless loop) - RESPONSIVE */}
         <motion.h1
           initial={{ x: '0%' }}
           animate={{ x: "-100%" }}
           transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-          className="leading-none -mt-[5.8vw] -mb-[2.665vw] font-normal tracking-tight relative"
+          className="leading-none text-[35vw] sm:text-[32vw] md:text-[30vw] font-normal tracking-tight relative"
           style={{
             textShadow: '0 2px 20px rgba(0, 0, 0, 0.3)',
             fontWeight: 400,
+            marginTop: '-0.19em',
+            marginBottom: '-0.09em',
           }}
         >
           <motion.span
@@ -173,9 +179,9 @@ const Marquee = () => {
         </motion.h1>
       </motion.div>
 
-      {/* Minimal decorative elements */}
+      {/* Minimal decorative elements - RESPONSIVE */}
       <motion.div
-        className="absolute top-10 left-10 w-12 h-12 border border-[#cdea68]/15 rounded-full"
+        className="absolute top-6 sm:top-8 md:top-10 left-6 sm:left-8 md:left-10 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border border-[#cdea68]/15 rounded-full"
         animate={{
           scale: [1, 1.15, 1],
           opacity: [0.15, 0.3, 0.15]
@@ -187,7 +193,7 @@ const Marquee = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-10 right-10 w-16 h-16 border border-white/10 rounded-full"
+        className="absolute bottom-6 sm:bottom-8 md:bottom-10 right-6 sm:right-8 md:right-10 w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 border border-white/10 rounded-full"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.25, 0.1]
@@ -199,7 +205,7 @@ const Marquee = () => {
         }}
       />
 
-      {/* Minimal particles */}
+      {/* Minimal particles - RESPONSIVE */}
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={`particle-${i}`}
@@ -227,7 +233,7 @@ const Marquee = () => {
         style={{
           backgroundImage: `linear-gradient(rgba(205, 234, 104, 0.5) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(205, 234, 104, 0.5) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px'
+          backgroundSize: '60px 60px'
         }}
       />
     </motion.div>
