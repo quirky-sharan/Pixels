@@ -1,22 +1,91 @@
-import React from "react";
+import React, { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
+
+const ease = [0.22, 1, 0.36, 1];
 
 const About = () => {
+  const container = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "end start"],
+  });
+
+  // ultra smooth scroll
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 30,
+    mass: 0.4,
+  });
+
+  // parallax intro
+  const textY = useTransform(smooth, [0, 1], [120, -120]);
+  const textOpacity = useTransform(smooth, [0, 0.25], [0, 1]);
+
+  // image motion
+  const imgScale = useTransform(smooth, [0, 1], [0.85, 1]);
+  const imgRotate = useTransform(smooth, [0, 1], [-4, 0]);
+
+  const fadeUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 1, ease },
+    },
+    viewport: { once: true, margin: "-100px" },
+  };
+
+  const stagger = {
+    whileInView: {
+      transition: { staggerChildren: 0.18 },
+    },
+  };
+
   return (
-    <div data-scroll data-scroll-speed='-.2' className="w-full py-20 bg-[#cdea68] rounded-t-3xl text-zinc-900">
-      <div className="px-[5.922vw]">
+    <section
+      ref={container}
+      data-scroll
+      data-scroll-speed="-.2"
+      className="w-full py-24 bg-[#cdea68] rounded-t-3xl text-zinc-900 overflow-hidden"
+    >
+      {/* TOP TEXT */}
+      <motion.div
+        style={{ y: textY, opacity: textOpacity }}
+        className="px-[5.922vw]"
+      >
         <p className="text-[3.65vw] leading-none w-[90%]">
           Our platform is a living digital archive for the world’s folk stories,
           oral traditions, and timeless songs — built to preserve cultural
           heritage, celebrate diversity, and connect generations through stories.
         </p>
-      </div>
-      {/* ******************************************************************************************* */}
-      <div className="w-full border-y border-zinc-500/60 mt-12 px-[5.922vw]">
-        <div className="flex flex-col md:flex-row gap-10 pt-4 pb-28">
-          <div className="md:basis-[25vw] lg:basis-[50vw]">
+      </motion.div>
+
+      {/* STRIP */}
+      <motion.div
+        variants={stagger}
+        initial="initial"
+        whileInView="whileInView"
+        viewport={{ once: true }}
+        className="w-full border-y border-zinc-500/60 mt-16 px-[5.922vw]"
+      >
+        <div className="flex flex-col md:flex-row gap-10 pt-6 pb-32">
+          <motion.div
+            variants={fadeUp}
+            className="md:basis-[25vw] lg:basis-[50vw]"
+          >
             What you can experience:
-          </div>
-          <div className="flex flex-col basis-[25vw] w-[50vw] gap-7">
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col basis-[25vw] w-[50vw] gap-7"
+          >
             <span>
               Explore authentic folk tales, regional legends, and traditional
               songs from every corner of the globe — shared by communities,
@@ -28,34 +97,85 @@ const About = () => {
               We blend technology with tradition to make cultural heritage
               accessible, immersive, and everlasting.
             </span>
-          </div>
-          <div className="flex flex-col basis-[25vw]  justify-end md:pl-24">
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col basis-[25vw] justify-end md:pl-24"
+          >
             <span className="mb-3">Connect:</span>
-            <span>Submit Your Story</span>
-            <span>Upload Folk Songs</span>
-            <span>Join Cultural Circles</span>
-            <span>Collaborate Globally</span>
-          </div>
+
+            {[
+              "Submit Your Story",
+              "Upload Folk Songs",
+              "Join Cultural Circles",
+              "Collaborate Globally",
+            ].map((item, i) => (
+              <motion.span
+                key={i}
+                whileHover={{ x: 14 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="cursor-pointer"
+              >
+                {item}
+              </motion.span>
+            ))}
+          </motion.div>
         </div>
-      </div>
-      {/* ******************************************************************************************* */}
-      <div className="flex flex-col lg:flex-row gap-10 px-[3.922vw] mt-4 justify-between">
-        <div className="flex flex-col gap-3 items-start">
+      </motion.div>
+
+      {/* BOTTOM */}
+      <div className="flex flex-col lg:flex-row gap-14 px-[3.922vw] mt-6 justify-between items-center">
+        <motion.div
+          {...fadeUp}
+          className="flex flex-col gap-5 items-start"
+        >
           <h3 className="text-[4vw]">Our approach:</h3>
-          <button className="text-white px-6 py-4 bg-zinc-800 rounded-full text-[1.184vw] flex gap-7 items-center justify-between">
-            <span>READ MORE</span>{" "}
-            <div className="w-2 h-2 rounded-full bg-zinc-100"></div>
-          </button>
-        </div>
-        <div className="rounded-2xl overflow-hidden flex items-center justify-center w-[400px] md:w-[600px]">
+
+          <motion.button
+            whileHover="hover"
+            initial="rest"
+            animate="rest"
+            className="relative text-white px-7 py-4 bg-zinc-900 rounded-full text-[1.184vw] overflow-hidden"
+          >
+            <motion.span
+              variants={{
+                rest: { y: 0 },
+                hover: { y: "-100%" },
+              }}
+              transition={{ duration: 0.45, ease }}
+              className="block"
+            >
+              READ MORE
+            </motion.span>
+
+            <motion.span
+              variants={{
+                rest: { y: "100%" },
+                hover: { y: 0 },
+              }}
+              transition={{ duration: 0.45, ease }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              READ MORE
+            </motion.span>
+          </motion.button>
+        </motion.div>
+
+        <motion.div
+          style={{ scale: imgScale, rotate: imgRotate }}
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.6, ease }}
+          className="rounded-2xl overflow-hidden flex items-center justify-center w-[400px] md:w-[640px] shadow-[0_25px_70px_rgba(0,0,0,0.18)]"
+        >
           <img
             src="https://ochi.design/wp-content/uploads/2022/05/Homepage-Photo-663x469.jpg"
-            className=" object-contain w-full"
+            className="object-cover w-full h-full"
             alt=""
           />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
